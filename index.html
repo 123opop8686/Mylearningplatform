@@ -1,0 +1,1642 @@
+```html
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07111f">
+<meta name="description" content="EduSphere — Global Online Learning Hub: Courses, interactive quizzes, study planning, and progress tracking.">
+<title>EduSphere Hub | Learn Without Limits</title>
+<style>
+:root {
+  --bg: #07111f;
+  --panel: #0d1b2d;
+  --panel2: #11243a;
+  --line: #20354d;
+  --text: #edf5ff;
+  --muted: #9cb0c8;
+  --cyan: #53d9f2;
+  --blue: #6285ff;
+  --green: #4be0ad;
+  --orange: #ffbd69;
+  --danger: #ff7585;
+  --shadow: 0 20px 60px #0003;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: radial-gradient(ellipse at 85% 0%, #123251 0, transparent 36%), var(--bg);
+  color: var(--text);
+  font-family: var(--font-family);
+  line-height: 1.65;
+}
+
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+
+.shell {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+/* LTR layout adjusts automatically via CSS */
+html[dir="ltr"] .shell { grid-template-columns: 260px minmax(0, 1fr); }
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 22px 15px;
+  border-left: 1px solid var(--line);
+  background: #091625eF;
+  backdrop-filter: blur(15px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+html[dir="ltr"] .sidebar {
+  border-left: 0;
+  border-right: 1px solid var(--line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 4px 8px;
+}
+.brandmark {
+  width: 44px;
+  height: 44px;
+  border-radius: 15px;
+  background: linear-gradient(140deg, var(--cyan), #6c7cff);
+  display: grid;
+  place-items: center;
+  color: #051321;
+  font-weight: 1000;
+  font-size: 21px;
+  box-shadow: 0 8px 25px #53d9f233;
+}
+.brand strong { display: block; font-size: 17px; letter-spacing: .2px; }
+.brand small { display: block; color: var(--muted); font-size: 11px; }
+
+.navlabel {
+  font-size: 10px;
+  color: #67809e;
+  font-weight: bold;
+  padding: 0 12px;
+  margin: 3px 0;
+}
+.nav { display: grid; gap: 5px; }
+.nav button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  color: #a8bad0;
+  text-align: initial;
+  padding: 11px 12px;
+  font-size: 13px;
+  width: 100%;
+}
+.nav button span { width: 23px; text-align: center; font-size: 17px; }
+.nav button.active, .nav button:hover {
+  background: #132a41;
+  color: var(--text);
+  border-color: #23415e;
+}
+html[dir="rtl"] .nav button.active { box-shadow: inset -3px 0 var(--cyan); }
+html[dir="ltr"] .nav button.active { box-shadow: inset 3px 0 var(--cyan); }
+
+.sidebottom {
+  margin-top: auto;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 15px;
+  background: linear-gradient(145deg, #102740, #0d1b2d);
+}
+.sidebottom p { font-size: 11px; color: var(--muted); margin: 6px 0 12px; }
+
+.main {
+  min-width: 0;
+  padding: 26px clamp(15px, 3vw, 42px) 55px;
+  max-width: 1600px;
+  width: 100%;
+  margin: auto;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.hello small { color: var(--muted); font-size: 12px; }
+.hello h1 { font-size: clamp(20px, 3vw, 29px); margin: 2px 0 0; letter-spacing: -.5px; }
+
+.topactions { display: flex; gap: 10px; align-items: center; }
+
+/* Language Selector styling */
+.lang-select {
+  background: #0d1b2d;
+  border: 1px solid var(--line);
+  color: var(--cyan);
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-weight: bold;
+  font-size: 12px;
+  outline: none;
+  cursor: pointer;
+}
+.lang-select:hover { border-color: var(--cyan); }
+
+.search { position: relative; min-width: 200px; }
+.search input {
+  width: 100%;
+  background: #0d1b2d;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 11px 12px;
+  color: var(--text);
+  outline: none;
+}
+html[dir="rtl"] .search input { padding-right: 38px; }
+html[dir="ltr"] .search input { padding-left: 38px; }
+
+.search:before {
+  content: "⌕";
+  position: absolute;
+  top: 4px;
+  font-size: 25px;
+  color: var(--muted);
+}
+html[dir="rtl"] .search:before { right: 13px; }
+html[dir="ltr"] .search:before { left: 13px; }
+
+.search input:focus { border-color: var(--cyan); }
+
+.avatar {
+  border: 1px solid #2c4964;
+  background: #18304a;
+  border-radius: 14px;
+  width: 43px;
+  height: 43px;
+  color: var(--cyan);
+  font-weight: bold;
+}
+
+.btn {
+  border: 1px solid var(--line);
+  background: #12263b;
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  transition: .2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.btn:hover { transform: translateY(-1px); border-color: #4a718d; }
+.btn.primary { background: linear-gradient(110deg, #53d9f2, #7e9bff); color: #06121f; border: 0; }
+.btn.ghost { background: transparent; }
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #254561;
+  border-radius: 23px;
+  padding: clamp(22px, 4vw, 38px);
+  background: linear-gradient(115deg, #112b43 0%, #102139 58%, #162747 100%);
+  box-shadow: var(--shadow);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.hero:after {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: #53d9f214;
+  left: 4%;
+  top: -100px;
+  box-shadow: 0 0 0 35px #53d9f208, 0 0 0 70px #53d9f205;
+}
+.hero > * { position: relative; z-index: 1; }
+.eyebrow { color: var(--cyan); font-size: 11px; font-weight: bold; letter-spacing: .5px; }
+.hero h2 { font-size: clamp(22px, 3vw, 34px); line-height: 1.35; margin: 10px 0; max-width: 600px; }
+.hero p { font-size: 13px; color: #b5c8de; max-width: 570px; margin: 0 0 20px; }
+.heroactions { display: flex; gap: 9px; flex-wrap: wrap; }
+.heroart { font-size: 85px; filter: drop-shadow(0 20px 25px #0004); margin: 0 20px; }
+
+.section { margin-top: 32px; }
+.sectionhead { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.sectionhead h2 { font-size: 19px; margin: 0; }
+.sectionhead p { color: var(--muted); font-size: 11px; margin: 4px 0 0; }
+.linkbtn { background: none; border: 0; color: var(--cyan); font-size: 12px; cursor: pointer; }
+
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 13px; margin-top: 19px; }
+.stat { border: 1px solid var(--line); border-radius: 17px; background: linear-gradient(145deg, #0e2034, #0b1929); padding: 17px; min-width: 0; }
+.stathead { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 11px; }
+.staticon { width: 35px; height: 35px; border-radius: 12px; background: #17334b; display: grid; place-items: center; font-size: 16px; }
+.stat strong { display: block; font-size: 27px; margin-top: 9px; line-height: 1.2; }
+.stat small { font-size: 10px; color: var(--green); }
+
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; min-height: 110px; }
+.course { border: 1px solid var(--line); border-radius: 17px; padding: 17px; background: linear-gradient(145deg, #102238, #0b1929); transition: .2s; min-width: 0; }
+.course:hover { transform: translateY(-3px); border-color: #3a6581; }
+.courseicon { height: 48px; width: 48px; display: grid; place-items: center; border-radius: 15px; font-size: 22px; margin-bottom: 13px; background: #183c55; }
+.course h3 { font-size: 15px; margin: 0 0 4px; }
+.course p { font-size: 11px; color: var(--muted); margin: 0 0 15px; }
+.coursefoot { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.smallmuted { font-size: 10px; color: var(--muted); }
+
+.split { display: grid; grid-template-columns: 1.3fr .7fr; gap: 15px; }
+.panel { border: 1px solid var(--line); border-radius: 18px; background: #0c1b2c; padding: 19px; min-width: 0; }
+.panel h3 { font-size: 15px; margin: 0 0 4px; }
+.panel > p { font-size: 11px; color: var(--muted); margin: 0 0 14px; }
+
+.lessonrow { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #ffffff0c; }
+.lessonrow:last-child { border: 0; }
+.lessonicon { flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px; background: #16344c; display: grid; place-items: center; }
+.lessoninfo { flex: 1; min-width: 0; }
+.lessoninfo strong { display: block; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lessoninfo small { font-size: 10px; color: var(--muted); }
+.lessonrow .btn { padding: 7px 10px; }
+
+.quickgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.quick { border: 1px solid var(--line); background: #102238; border-radius: 14px; padding: 14px; text-align: initial; color: var(--text); }
+.quick b { display: block; font-size: 12px; margin: 7px 0 2px; }
+.quick small { font-size: 10px; color: var(--muted); }
+
+.page { display: none; }
+.page.active { display: block; animation: fade .25s ease; }
+@keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+.filterbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 17px; }
+.filterbar select, .field { background: #0d1b2d; border: 1px solid var(--line); color: var(--text); border-radius: 11px; padding: 10px 12px; outline: none; }
+.filterbar select { min-width: 150px; }
+
+.lessonlist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.lessoncard { display: flex; gap: 13px; align-items: flex-start; border: 1px solid var(--line); border-radius: 16px; padding: 16px; background: #0d1b2d; }
+.lessoncard .lessonicon { width: 45px; height: 45px; }
+.lessoncard h3 { font-size: 13px; margin: 0 0 4px; }
+.lessoncard p { font-size: 11px; color: var(--muted); margin: 0 0 10px; }
+.lessoncard .btn { padding: 7px 11px; }
+
+.toolgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.toolcard { border: 1px solid var(--line); border-radius: 17px; padding: 20px; background: linear-gradient(145deg, #10233b, #0a1729); }
+.toolcard h3 { font-size: 15px; margin: 12px 0 5px; }
+.toolcard p { font-size: 11px; color: var(--muted); min-height: 40px; }
+.toolcard .bigicon { font-size: 27px; }
+
+.planner { display: grid; gap: 9px; }
+.planrow { display: grid; grid-template-columns: 100px 1fr auto; gap: 10px; align-items: center; padding: 11px; border: 1px solid var(--line); border-radius: 12px; }
+.planrow input[type=text] { width: 100%; min-width: 0; background: #071326; color: var(--text); border: 1px solid var(--line); padding: 9px; border-radius: 9px; }
+.planrow label { font-size: 10px; color: var(--muted); display: flex; gap: 6px; align-items: center; }
+
+.question { font-size: 18px; font-weight: bold; margin: 15px 0; }
+.option { display: block; width: 100%; text-align: initial; border: 1px solid var(--line); border-radius: 11px; background: #102238; color: var(--text); padding: 12px; margin: 8px 0; transition: .2s; }
+.option:hover, .option.chosen { border-color: var(--cyan); background: #53d9f211; }
+.option.correct { border-color: var(--green); background: #4be0ad15; }
+.option.wrong { border-color: var(--danger); background: #ff758515; }
+
+.notice { border: 1px solid #b9873b66; background: #7b53191a; color: #e7c993; border-radius: 12px; padding: 12px; font-size: 11px; margin-top: 18px; }
+.empty { text-align: center; padding: 35px; color: var(--muted); border: 1px dashed var(--line); border-radius: 15px; }
+
+.modalback { display: none; position: fixed; inset: 0; background: #020711cc; backdrop-filter: blur(8px); z-index: 20; align-items: center; justify-content: center; padding: 18px; }
+.modalback.open { display: flex; }
+.modal { width: min(620px, 100%); max-height: 90vh; overflow: auto; border: 1px solid #294762; border-radius: 21px; background: #0c1b2c; padding: 24px; box-shadow: var(--shadow); }
+.modalhead { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.modal h2 { font-size: 22px; margin: 9px 0; }
+.modal p { color: var(--muted); font-size: 12px; }
+.close { background: #152a40; color: var(--text); border: 1px solid var(--line); border-radius: 10px; width: 35px; height: 35px; font-size: 22px; display: grid; place-items: center; }
+
+.fieldrow { display: grid; gap: 6px; margin: 12px 0; }
+.fieldrow label { font-size: 11px; color: var(--muted); }
+.fieldrow .field { width: 100%; }
+
+.toast { position: fixed; bottom: 22px; z-index: 50; background: #15334a; border: 1px solid #3a7188; color: var(--text); padding: 12px 17px; border-radius: 12px; box-shadow: var(--shadow); opacity: 0; transform: translateY(10px); pointer-events: none; transition: .25s; font-size: 12px; }
+html[dir="rtl"] .toast { right: 22px; }
+html[dir="ltr"] .toast { left: 22px; }
+.toast.show { opacity: 1; transform: none; }
+
+.footer { border-top: 1px solid var(--line); padding-top: 20px; margin-top: 40px; display: flex; justify-content: space-between; gap: 15px; color: var(--muted); font-size: 10px; }
+
+.official-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px; margin-top: 15px; }
+.official-card { border: 1px solid var(--line); border-radius: 16px; padding: 16px; background: linear-gradient(145deg, #102238, #0b1929); }
+.official-card h3 { margin: 0 0 5px; font-size: 14px; }
+.official-card p { font-size: 11px; color: var(--muted); min-height: 34px; margin: 0 0 12px; }
+.official-card .btn { display: inline-flex; margin: 3px 4px 3px 0; }
+
+@media(max-width:1100px) { .cards, .official-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .split { grid-template-columns: 1fr; } .heroart { font-size: 70px; } }
+@media(max-width:760px) {
+  .shell { display: block; }
+  .sidebar { position: fixed; z-index: 15; top: auto; bottom: 0; left: 0; right: 0; width: 100%; height: auto; padding: 7px 8px calc(7px + env(safe-area-inset-bottom)); border-left: 0; border-top: 1px solid var(--line); background: #091625f5; }
+  .brand, .navlabel, .sidebottom { display: none; }
+  .nav { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2px; }
+  .nav button { display: flex; flex-direction: column; gap: 2px; text-align: center; padding: 7px 1px; font-size: 9px; border-radius: 9px; justify-content: center; }
+  .nav button span { font-size: 18px; }
+  .main { padding: 17px 14px 105px; }
+  .topbar { align-items: flex-start; margin-bottom: 18px; }
+  .hello h1 { font-size: 20px; }
+  .search { min-width: 0; width: 100%; }
+  .hero { padding: 22px 19px; }
+  .heroart { display: none; }
+  .hero h2 { font-size: 22px; }
+  .stats { gap: 9px; margin-top: 13px; }
+  .stat { padding: 13px; }
+  .stat strong { font-size: 21px; }
+  .cards, .toolgrid, .lessonlist, .official-grid { grid-template-columns: 1fr; }
+  .planrow { grid-template-columns: 1fr auto; }
+  .planrow input[type=text] { grid-column: 1/-1; grid-row: 2; }
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brandmark">E</div>
+      <div>
+        <strong>EduSphere</strong>
+        <small data-i18n="tagline">Your Global Learning Hub</small>
+      </div>
+    </div>
+    <div>
+      <div class="navlabel" data-i18n="mainMenu">MAIN MENU</div>
+      <nav class="nav" id="nav">
+        <button class="active" data-page="dashboard"><span>⌂</span><span data-i18n="navDashboard">Dashboard</span></button>
+        <button data-page="courses"><span>▤</span><span data-i18n="navCourses">Courses</span></button>
+        <button data-page="official"><span>🏛️</span><span data-i18n="navOfficial">E-Library</span></button>
+        <button data-page="exams"><span>✓</span><span data-i18n="navQuizzes">Quizzes</span></button>
+        <button data-page="planner"><span>◷</span><span data-i18n="navPlanner">Study Plan</span></button>
+        <button data-page="profile"><span>♙</span><span data-i18n="navProgress">My Progress</span></button>
+      </nav>
+    </div>
+    <div class="sidebottom">
+      <div class="eyebrow" data-i18n="sideKeepGoing">KEEP GOING ✦</div>
+      <strong data-i18n="sideStepTitle">One Step Every Day</strong>
+      <p data-i18n="sideStepDesc">Even 30 minutes of regular study makes a huge difference.</p>
+      <button class="btn primary" style="width:100%" data-go="planner" data-i18n="sidePlanBtn">Plan Your Week</button>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="main">
+    <header class="topbar">
+      <div class="hello">
+        <small id="dateLabel">Learning Workspace</small>
+        <h1 id="welcome">Welcome to EduSphere 👋</h1>
+      </div>
+      <div class="topactions">
+        <!-- Multi-language Selector -->
+        <select class="lang-select" id="langSelect" aria-label="Select Language">
+          <option value="ar">العربية (Arabic)</option>
+          <option value="en">English</option>
+          <option value="fr">Français (French)</option>
+          <option value="de">Deutsch (German)</option>
+        </select>
+        <div class="search">
+          <input id="globalSearch" placeholder="Search lessons..." aria-label="Search">
+        </div>
+        <button class="avatar" id="accountBtn" aria-label="Account">E</button>
+      </div>
+    </header>
+
+    <!-- PAGE 1: Dashboard -->
+    <section class="page active" id="page-dashboard">
+      <div class="hero">
+        <div>
+          <span class="eyebrow" data-i18n="heroEyebrow">GLOBAL LEARNING • YOUR FUTURE</span>
+          <h2 data-i18n="heroTitle">Learn your way and achieve your highest goals every day.</h2>
+          <p data-i18n="heroDesc">An all-in-one platform to organize study schedules, review global curriculums, and practice interactive quizzes.</p>
+          <div class="heroactions">
+            <button class="btn primary" data-go="courses" data-i18n="startStudying">Start Studying →</button>
+            <button class="btn ghost" data-go="exams" data-i18n="tryQuiz">Try a Quiz</button>
+          </div>
+        </div>
+        <div class="heroart" aria-hidden="true">🎓</div>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stathead"><span data-i18n="statCompleted">Completed Lessons</span><span class="staticon">✓</span></div>
+          <strong id="statLessons">0</strong>
+          <small data-i18n="statCompletedSub">Every finished lesson counts</small>
+        </div>
+        <div class="stat">
+          <div class="stathead"><span data-i18n="statQuizScore">Last Quiz Score</span><span class="staticon">✎</span></div>
+          <strong id="statScore">—</strong>
+          <small data-i18n="statQuizSub">Practice makes perfect</small>
+        </div>
+        <div class="stat">
+          <div class="stathead"><span data-i18n="statGoals">Weekly Goals</span><span class="staticon">◷</span></div>
+          <strong id="statGoals">0/7</strong>
+          <small data-i18n="statGoalsSub">Flexible study schedule</small>
+        </div>
+        <div class="stat">
+          <div class="stathead"><span data-i18n="statStreak">Active Days</span><span class="staticon">✦</span></div>
+          <strong id="statStreak">0</strong>
+          <small data-i18n="statStreakSub">Days with activity</small>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sectionhead">
+          <div>
+            <h2 data-i18n="chooseGradeTitle">Choose Your Academic Grade</h2>
+            <p data-i18n="chooseGradeDesc">Select your level to explore specialized subjects.</p>
+          </div>
+          <button class="linkbtn" data-go="courses" data-i18n="browseAllSubjects">Browse all subjects →</button>
+        </div>
+        <div class="cards" id="gradeCards"></div>
+      </div>
+
+      <div class="section split">
+        <div class="panel">
+          <div class="sectionhead">
+            <div>
+              <h3 data-i18n="continueTitle">Continue Where You Left Off</h3>
+              <p data-i18n="continueDesc">Recent available practice lessons</p>
+            </div>
+            <button class="linkbtn" data-go="courses" data-i18n="allLessons">All lessons</button>
+          </div>
+          <div id="recentLessons"></div>
+        </div>
+        <div class="panel">
+          <h3 data-i18n="toolsTitle">Interactive Study Tools</h3>
+          <p data-i18n="toolsDesc">Boost productivity with guided study aids.</p>
+          <div class="quickgrid">
+            <button class="quick" data-go="exams"><span>🧠</span><b data-i18n="toolQuiz">Test Yourself</b><small data-i18n="toolQuizSub">Quizzes & feedback</small></button>
+            <button class="quick" data-go="planner"><span>🗓️</span><b data-i18n="toolPlan">Plan Week</b><small data-i18n="toolPlanSub">Daily milestones</small></button>
+            <button class="quick" data-go="courses"><span>📚</span><b data-i18n="toolSubjects">Browse Subjects</b><small data-i18n="toolSubjectsSub">By grade & term</small></button>
+            <button class="quick" data-go="profile"><span>📈</span><b data-i18n="toolTrack">Track Progress</b><small data-i18n="toolTrackSub">Performance overview</small></button>
+          </div>
+        </div>
+      </div>
+      <div class="notice" data-i18n="disclaimer">Note: EduSphere Online is an independent interactive learning platform designed for self-paced student preparation.</div>
+    </section>
+
+    <!-- PAGE 2: Courses -->
+    <section class="page" id="page-courses">
+      <div class="sectionhead">
+        <div>
+          <span class="eyebrow" data-i18n="coursesEyebrow">LEARNING LIBRARY</span>
+          <h2 data-i18n="coursesTitle">Curriculum & Subjects</h2>
+          <p data-i18n="coursesDesc">Filter by grade, term, and subject to view lessons.</p>
+        </div>
+      </div>
+      <div class="filterbar">
+        <select id="gradeFilter" aria-label="Grade"></select>
+        <select id="termFilter" aria-label="Term">
+          <option value="1" data-i18n="term1">Term 1</option>
+          <option value="2" data-i18n="term2">Term 2</option>
+        </select>
+        <select id="subjectFilter" aria-label="Subject"></select>
+        <button class="btn" id="resetFilters" data-i18n="resetFilters">Reset Filters</button>
+      </div>
+      <div class="lessonlist" id="lessonList"></div>
+    </section>
+
+    <!-- PAGE 3: E-Library -->
+    <section class="page" id="page-official">
+      <div class="sectionhead">
+        <div>
+          <span class="eyebrow" data-i18n="libraryEyebrow">DIGITAL RESOURCES</span>
+          <h2 data-i18n="libraryTitle">Official Textbooks & Open Resources</h2>
+          <p data-i18n="libraryDesc">Direct links to official digital curriculum repositories.</p>
+        </div>
+      </div>
+      <div class="official-grid" id="officialGrid"></div>
+    </section>
+
+    <!-- PAGE 4: Quizzes -->
+    <section class="page" id="page-exams">
+      <div class="sectionhead">
+        <div>
+          <span class="eyebrow" data-i18n="quizEyebrow">PRACTICE & EVALUATION</span>
+          <h2 data-i18n="quizPageTitle">Interactive Quizzes</h2>
+          <p data-i18n="quizPageDesc">Test your knowledge with immediate explanations.</p>
+        </div>
+      </div>
+      <div class="toolgrid">
+        <article class="toolcard">
+          <div class="bigicon">➗</div>
+          <h3 data-i18n="mathQuizTitle">Mathematics Challenge</h3>
+          <p data-i18n="mathQuizDesc">Arithmetic, equations and geometry problems.</p>
+          <button class="btn primary" data-quiz="math" data-i18n="startQuizBtn">Start Quiz</button>
+        </article>
+        <article class="toolcard">
+          <div class="bigicon">🔬</div>
+          <h3 data-i18n="sciQuizTitle">General Sciences</h3>
+          <p data-i18n="sciQuizDesc">Physics, chemistry and biological concepts.</p>
+          <button class="btn primary" data-quiz="science" data-i18n="startQuizBtn">Start Quiz</button>
+        </article>
+        <article class="toolcard">
+          <div class="bigicon">🌍</div>
+          <h3 data-i18n="langQuizTitle">Global Languages & Logic</h3>
+          <p data-i18n="langQuizDesc">Language comprehension and analytical reasoning.</p>
+          <button class="btn primary" data-quiz="language" data-i18n="startQuizBtn">Start Quiz</button>
+        </article>
+      </div>
+      <div class="panel" style="margin-top:17px">
+        <h3 data-i18n="latestResultTitle">Latest Result</h3>
+        <p data-i18n="latestResultDesc">Results are stored locally on your device.</p>
+        <div id="lastResult" class="empty" data-i18n="noQuizYet">No quiz completed yet. Select one above to begin.</div>
+      </div>
+    </section>
+
+    <!-- PAGE 5: Study Planner -->
+    <section class="page" id="page-planner">
+      <div class="sectionhead">
+        <div>
+          <span class="eyebrow" data-i18n="planEyebrow">TIME MANAGEMENT</span>
+          <h2 data-i18n="planTitle">Weekly Study Planner</h2>
+          <p data-i18n="planDesc">Set daily targets and mark them off as you achieve them.</p>
+        </div>
+        <button class="btn primary" id="savePlan" data-i18n="savePlanBtn">Save Plan</button>
+      </div>
+      <div class="panel">
+        <div class="planner" id="plannerRows"></div>
+        <p id="planMessage" style="margin-top:12px; font-weight:bold; color:var(--green);"></p>
+      </div>
+    </section>
+
+    <!-- PAGE 6: Progress & Profile -->
+    <section class="page" id="page-profile">
+      <div class="sectionhead">
+        <div>
+          <span class="eyebrow" data-i18n="profileEyebrow">PERSONAL WORKSPACE</span>
+          <h2 data-i18n="profileTitle">My Profile & Progress</h2>
+          <p data-i18n="profileDesc">Manage your local account settings and study history.</p>
+        </div>
+      </div>
+      <div class="split">
+        <div class="panel">
+          <h3 data-i18n="progressSummary">Progress Summary</h3>
+          <div class="stats">
+            <div class="stat"><div class="stathead" data-i18n="statCompleted">Completed Lessons</div><strong id="profileLessons">0</strong></div>
+            <div class="stat"><div class="stathead" data-i18n="bestScore">Best Score</div><strong id="profileBest">—</strong></div>
+          </div>
+          <div class="section">
+            <h3 data-i18n="completedHistory">Completed Lessons Log</h3>
+            <div id="completedList"></div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3 data-i18n="studentSettings">Student Settings</h3>
+          <div class="fieldrow">
+            <label for="profileName" data-i18n="labelDisplayName">Display Name</label>
+            <input class="field" id="profileName" placeholder="Enter your name">
+          </div>
+          <div class="fieldrow">
+            <label for="profileGrade" data-i18n="labelGrade">Academic Grade</label>
+            <select class="field" id="profileGrade"></select>
+          </div>
+          <button class="btn primary" id="saveProfile" data-i18n="saveSettings">Save Settings</button>
+          <div style="height:20px"></div>
+          <button class="btn" id="exportData" data-i18n="exportData">Export Progress (.json)</button>
+          <button class="btn" id="clearData" style="border-color:#653a49;color:#ff9eaa; margin-top:8px;" data-i18n="clearData">Clear Device Data</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© 2026 EduSphere Online Learning Hub</span>
+      <span data-i18n="footerNote">Fully Responsive • Multi-Language Support</span>
+    </footer>
+  </main>
+</div>
+
+<!-- Modal: Lesson Viewer -->
+<div class="modalback" id="lessonModal" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="modalhead">
+      <span class="eyebrow" id="lessonSubject">Lesson</span>
+      <button class="close" data-close="lessonModal" aria-label="Close">×</button>
+    </div>
+    <h2 id="lessonTitle">Lesson Title</h2>
+    <p id="lessonMeta"></p>
+    <div class="panel" style="background:#102238">
+      <h3 data-i18n="studySteps">Suggested Study Steps</h3>
+      <ol id="lessonSteps" style="font-size:12px; color:#c2d2e4; padding-inline-start:20px;">
+        <li data-i18n="step1">Review key objectives and notes.</li>
+        <li data-i18n="step2">Watch core videos or read course materials.</li>
+        <li data-i18n="step3">Complete practice exercises and self-test questions.</li>
+      </ol>
+    </div>
+    <button class="btn primary" id="completeLesson" style="width:100%; margin-top:14px;" data-i18n="markComplete">Mark Lesson Complete ✓</button>
+  </div>
+</div>
+
+<!-- Modal: Quiz Viewer -->
+<div class="modalback" id="quizModal" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="modalhead">
+      <span class="eyebrow" data-i18n="quizModalTitle">Practice Quiz</span>
+      <button class="close" data-close="quizModal" aria-label="Close">×</button>
+    </div>
+    <h2 id="quizTitle">Test Yourself</h2>
+    <p id="quizProgress">Question 1</p>
+    <div id="quizContent"></div>
+    <div id="quizFeedback"></div>
+    <button class="btn primary" id="quizNext" style="width:100%; margin-top:13px" disabled data-i18n="nextQuestion">Next Question →</button>
+  </div>
+</div>
+
+<!-- Modal: User Account Initialization -->
+<div class="modalback" id="accountModal" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="modalhead">
+      <span class="eyebrow" data-i18n="welcomeEyebrow">Welcome Student</span>
+      <button class="close" data-close="accountModal" aria-label="Close">×</button>
+    </div>
+    <h2 data-i18n="welcomeModalTitle">Welcome to EduSphere</h2>
+    <p data-i18n="welcomeModalDesc">Personalize your learning workspace on this device.</p>
+    <div class="fieldrow">
+      <label for="welcomeName" data-i18n="labelDisplayName">Display Name</label>
+      <input class="field" id="welcomeName" placeholder="e.g. Alex">
+    </div>
+    <div class="fieldrow">
+      <label for="welcomeGrade" data-i18n="labelGrade">Academic Grade</label>
+      <select class="field" id="welcomeGrade"></select>
+    </div>
+    <button class="btn primary" id="saveWelcome" style="width:100%" data-i18n="saveAndContinue">Save and Continue</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+// --- I18N DICTIONARY (Arabic, English, French, German) ---
+const i18n = {
+  ar: {
+    dir: 'rtl',
+    font: "'Segoe UI', Tahoma, Arial, sans-serif",
+    tagline: "منصة التعلم الذكي عبر الإنترنت",
+    mainMenu: "القائمة الرئيسية",
+    navDashboard: "الرئيسية",
+    navCourses: "المقررات الدراسية",
+    navOfficial: "المكتبة الرقمية",
+    navQuizzes: "الاختبارات",
+    navPlanner: "خطة الدراسة",
+    navProgress: "تقدمي الدراسي",
+    sideKeepGoing: "واصل التقدم ✦",
+    sideStepTitle: "خطوة واحدة كل يوم",
+    sideStepDesc: "حتى 30 دقيقة من المذاكرة المنتظمة تصنع فارقاً كبيراً.",
+    sidePlanBtn: "خطط لأسبوعك",
+    welcomePrefix: "أهلاً بك في EduSphere 👋",
+    searchPlaceholder: "ابحث عن الدروس أو المواد...",
+    heroEyebrow: "منصتك العالمية • مستقبلك الرقمي",
+    heroTitle: "تعلم بأسلوبك وحقق أهدافك التعليمية كل يوم.",
+    heroDesc: "منصة واحدة لتنظيم وقت المذاكرة، مراجعة المقررات وممارسة الأسئلة التفاعلية لكافة الصفوف.",
+    startStudying: "ابدأ المذاكرة ←",
+    tryQuiz: "جرب اختباراً",
+    statCompleted: "الدروس المكتملة",
+    statCompletedSub: "كل درس تنهيه يحسب لك",
+    statQuizScore: "آخر نتيجة اختبار",
+    statQuizSub: "الممارسة تحقق الإتقان",
+    statGoals: "أهداف الأسبوع",
+    statGoalsSub: "جدول دراسي مرن",
+    statStreak: "أيام النشاط",
+    statStreakSub: "أيام سجلت فيها نشاطاً",
+    chooseGradeTitle: "اختر الصف الدراسي",
+    chooseGradeDesc: "حدد مرحلتك التعليمية لعرض المواد المتاحة.",
+    browseAllSubjects: "عرض جميع المواد ←",
+    continueTitle: "تابع من حيث توقفت",
+    continueDesc: "دروس وتمارين متاحة حالياً",
+    allLessons: "كل الدروس",
+    toolsTitle: "أدوات الدراسة التفاعلية",
+    toolsDesc: "اتبع خطة منظمة للوصول لقمة أدائك.",
+    toolQuiz: "اختبر نفسك",
+    toolQuizSub: "أسئلة وتقييم فورى",
+    toolPlan: "خطط لأسبوعك",
+    toolPlanSub: "أهداف يومية",
+    toolSubjects: "المواد الدراسية",
+    toolSubjectsSub: "حسب الصف والترم",
+    toolTrack: "متابعة التقدم",
+    toolTrackSub: "ملخص أدائك",
+    disclaimer: "تنبيه: EduSphere Online منصة تعليمية مستقلة للمذاكرة والتدريب الذاتي.",
+    coursesEyebrow: "المكتبة التعليمية",
+    coursesTitle: "المناهج والمواد الدراسية",
+    coursesDesc: "حدد الصف والترم والمادة لعرض الدروس.",
+    term1: "الترم الأول",
+    term2: "الترم الثاني",
+    resetFilters: "إعادة ضبط",
+    libraryEyebrow: "المصادر الرقمية",
+    libraryTitle: "المكتبة الإلكترونية والكتب الرسمية",
+    libraryDesc: "روابط مباشرة للمكتبات والمنصات التعليمية الرسمية.",
+    quizEyebrow: "التدريب والمراجعة",
+    quizPageTitle: "اختبارات تفاعلية",
+    quizPageDesc: "أسئلة تدريبية قصيرة مع تصحيح وشرح فوري.",
+    mathQuizTitle: "تحدي الرياضيات",
+    mathQuizDesc: "تمارين الحساب والمعادلات والهندسة.",
+    sciQuizTitle: "العلوم العامة",
+    sciQuizDesc: "مفاهيم الفيزياء والكيمياء والأحياء.",
+    langQuizTitle: "اللغات والمنطق",
+    langQuizDesc: "الفهم القرائي والتفكير التحليلي.",
+    startQuizBtn: "ابدأ الاختبار",
+    latestResultTitle: "آخر نتيجة",
+    latestResultDesc: "تحفظ نتائجك محلياً على هذا الجهاز.",
+    noQuizYet: "لم تكمل أي اختبار بعد. اختر اختباراً للبدء.",
+    planEyebrow: "تنظيم الوقت",
+    planTitle: "جدول الدراسة الأسبوعي",
+    planDesc: "حدد هدفاً لكل يوم واكتمله بانتظام.",
+    savePlanBtn: "حفظ الخطة",
+    profileEyebrow: "مساحتك الشخصية",
+    profileTitle: "حسابي وتقدمي",
+    profileDesc: "بياناتك محفوظة على جهازك الحالي.",
+    progressSummary: "ملخص الإنجاز",
+    bestScore: "أفضل نتيجة",
+    completedHistory: "سجل الدروس المكتملة",
+    studentSettings: "إعدادات الطالب",
+    labelDisplayName: "الاسم المعروض",
+    labelGrade: "الصف الدراسي",
+    saveSettings: "حفظ الإعدادات",
+    exportData: "تصدير البيانات (.json)",
+    clearData: "مسح البيانات من الجهاز",
+    footerNote: "تصميم متجاوب • دعم متعدد اللغات",
+    studySteps: "خطوات المذاكرة المقترحة",
+    step1: "اقرأ العناوين والنقاط الرئيسية بتمعن.",
+    step2: "راجع المحتوى والشروحات المتاحة للمادة.",
+    step3: "اكتب ملخصاً وأجب على الأسئلة التدريبية.",
+    markComplete: "تعليم الدرس كمكتمل ✓",
+    quizModalTitle: "اختبار تفاعلي",
+    nextQuestion: "السؤال التالي ←",
+    welcomeEyebrow: "مرحباً بك",
+    welcomeModalTitle: "أهلاً بك في EduSphere",
+    welcomeModalDesc: "سجل اسمك وصفك الدراسي لتخصيص تجربتك.",
+    saveAndContinue: "حفظ ومتابعة",
+    days: ["السبت", "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة"],
+    startLesson: "ابدأ الدرس",
+    completedTag: "مكتمل ✓",
+    openLesson: "افتح الدرس ←"
+  },
+  en: {
+    dir: 'ltr',
+    font: "Inter, 'Segoe UI', Arial, sans-serif",
+    tagline: "Global Online Learning Hub",
+    mainMenu: "MAIN MENU",
+    navDashboard: "Dashboard",
+    navCourses: "Courses",
+    navOfficial: "E-Library",
+    navQuizzes: "Quizzes",
+    navPlanner: "Study Plan",
+    navProgress: "My Progress",
+    sideKeepGoing: "KEEP GOING ✦",
+    sideStepTitle: "One Step Every Day",
+    sideStepDesc: "Even 30 minutes of regular study makes a huge difference.",
+    sidePlanBtn: "Plan Your Week",
+    welcomePrefix: "Welcome to EduSphere 👋",
+    searchPlaceholder: "Search lessons or subjects...",
+    heroEyebrow: "GLOBAL LEARNING • YOUR FUTURE",
+    heroTitle: "Learn your way and achieve your highest goals every day.",
+    heroDesc: "An all-in-one platform to organize study schedules, review global curriculums, and practice interactive quizzes.",
+    startStudying: "Start Studying →",
+    tryQuiz: "Try a Quiz",
+    statCompleted: "Completed Lessons",
+    statCompletedSub: "Every finished lesson counts",
+    statQuizScore: "Last Quiz Score",
+    statQuizSub: "Practice makes perfect",
+    statGoals: "Weekly Goals",
+    statGoalsSub: "Flexible study schedule",
+    statStreak: "Active Days",
+    statStreakSub: "Days with recorded activity",
+    chooseGradeTitle: "Choose Your Academic Grade",
+    chooseGradeDesc: "Select your level to explore specialized subjects.",
+    browseAllSubjects: "Browse all subjects →",
+    continueTitle: "Continue Where You Left Off",
+    continueDesc: "Recent available practice lessons",
+    allLessons: "All lessons",
+    toolsTitle: "Interactive Study Tools",
+    toolsDesc: "Boost productivity with guided study aids.",
+    toolQuiz: "Test Yourself",
+    toolQuizSub: "Quizzes & feedback",
+    toolPlan: "Plan Week",
+    toolPlanSub: "Daily milestones",
+    toolSubjects: "Browse Subjects",
+    toolSubjectsSub: "By grade & term",
+    toolTrack: "Track Progress",
+    toolTrackSub: "Performance overview",
+    disclaimer: "Note: EduSphere Online is an independent interactive learning platform for self-paced study.",
+    coursesEyebrow: "LEARNING LIBRARY",
+    coursesTitle: "Curriculum & Subjects",
+    coursesDesc: "Filter by grade, term, and subject to view lessons.",
+    term1: "Term 1",
+    term2: "Term 2",
+    resetFilters: "Reset Filters",
+    libraryEyebrow: "DIGITAL RESOURCES",
+    libraryTitle: "Official Textbooks & Open Resources",
+    libraryDesc: "Direct links to official digital curriculum repositories.",
+    quizEyebrow: "PRACTICE & EVALUATION",
+    quizPageTitle: "Interactive Quizzes",
+    quizPageDesc: "Test your knowledge with immediate explanations.",
+    mathQuizTitle: "Mathematics Challenge",
+    mathQuizDesc: "Arithmetic, equations and geometry problems.",
+    sciQuizTitle: "General Sciences",
+    sciQuizDesc: "Physics, chemistry and biological concepts.",
+    langQuizTitle: "Languages & Logic",
+    langQuizDesc: "Reading comprehension and analytical reasoning.",
+    startQuizBtn: "Start Quiz",
+    latestResultTitle: "Latest Result",
+    latestResultDesc: "Results are stored locally on your device.",
+    noQuizYet: "No quiz completed yet. Select one above to begin.",
+    planEyebrow: "TIME MANAGEMENT",
+    planTitle: "Weekly Study Planner",
+    planDesc: "Set daily targets and mark them off as you achieve them.",
+    savePlanBtn: "Save Plan",
+    profileEyebrow: "PERSONAL WORKSPACE",
+    profileTitle: "My Profile & Progress",
+    profileDesc: "Manage your local account settings and study history.",
+    progressSummary: "Progress Summary",
+    bestScore: "Best Score",
+    completedHistory: "Completed Lessons Log",
+    studentSettings: "Student Settings",
+    labelDisplayName: "Display Name",
+    labelGrade: "Academic Grade",
+    saveSettings: "Save Settings",
+    exportData: "Export Progress (.json)",
+    clearData: "Clear Device Data",
+    footerNote: "Responsive Design • Multi-Language Support",
+    studySteps: "Suggested Study Steps",
+    step1: "Review key objectives and notes thoroughly.",
+    step2: "Watch core videos or read course materials.",
+    step3: "Complete practice exercises and self-test questions.",
+    markComplete: "Mark Lesson Complete ✓",
+    quizModalTitle: "Practice Quiz",
+    nextQuestion: "Next Question →",
+    welcomeEyebrow: "Welcome Student",
+    welcomeModalTitle: "Welcome to EduSphere",
+    welcomeModalDesc: "Personalize your learning workspace on this device.",
+    saveAndContinue: "Save and Continue",
+    days: ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    startLesson: "Start",
+    completedTag: "Completed ✓",
+    openLesson: "Open Lesson →"
+  },
+  fr: {
+    dir: 'ltr',
+    font: "Inter, 'Segoe UI', Arial, sans-serif",
+    tagline: "Centre d'Apprentissage en Ligne",
+    mainMenu: "MENU PRINCIPAL",
+    navDashboard: "Tableau de bord",
+    navCourses: "Cours",
+    navOfficial: "Bibliothèque",
+    navQuizzes: "Quiz",
+    navPlanner: "Planning",
+    navProgress: "Mon Progrès",
+    sideKeepGoing: "CONTINUEZ ✦",
+    sideStepTitle: "Un pas chaque jour",
+    sideStepDesc: "Même 30 minutes d'étude régulière font une grande différence.",
+    sidePlanBtn: "Planifier votre semaine",
+    welcomePrefix: "Bienvenue sur EduSphere 👋",
+    searchPlaceholder: "Rechercher des leçons...",
+    heroEyebrow: "APPRENTISSAGE GLOBAL • VOTRE AVENIR",
+    heroTitle: "Apprenez à votre rythme et atteignez vos objectifs chaque jour.",
+    heroDesc: "Une plateforme tout-en-un pour organiser votre temps d'étude et passer des quiz.",
+    startStudying: "Commencer à étudier →",
+    tryQuiz: "Essayer un quiz",
+    statCompleted: "Leçons terminées",
+    statCompletedSub: "Chaque leçons compte",
+    statQuizScore: "Dernier score",
+    statQuizSub: "La pratique mène à la maîtrise",
+    statGoals: "Objectifs hebdo",
+    statGoalsSub: "Planning flexible",
+    statStreak: "Jours actifs",
+    statStreakSub: "Jours avec activité",
+    chooseGradeTitle: "Choisissez votre niveau",
+    chooseGradeDesc: "Sélectionnez votre niveau pour voir les matières.",
+    browseAllSubjects: "Toutes les matières →",
+    continueTitle: "Reprendre l'étude",
+    continueDesc: "Leçons récentes disponibles",
+    allLessons: "Toutes les leçons",
+    toolsTitle: "Outils d'étude interactifs",
+    toolsDesc: "Optimisez votre rythme d'apprentissage.",
+    toolQuiz: "Testez-vous",
+    toolQuizSub: "Quiz & évaluations",
+    toolPlan: "Planifier la semaine",
+    toolPlanSub: "Objectifs quotidiens",
+    toolSubjects: "Matières",
+    toolSubjectsSub: "Par niveau et trimestre",
+    toolTrack: "Suivi du progrès",
+    toolTrackSub: "Aperçu des performances",
+    disclaimer: "Remarque: EduSphere Online est une plateforme d'apprentissage indépendante.",
+    coursesEyebrow: "BIBLIOTHÈQUE DE COURS",
+    coursesTitle: "Programmes & Matières",
+    coursesDesc: "Filtrez par niveau, trimestre et matière.",
+    term1: "Trimestre 1",
+    term2: "Trimestre 2",
+    resetFilters: "Réinitialiser",
+    libraryEyebrow: "RESSOURCES NUMÉRIQUES",
+    libraryTitle: "Bibliothèque numérique & Manuel",
+    libraryDesc: "Accès direct aux ressources éducatives officielles.",
+    quizEyebrow: "ÉVALUATION",
+    quizPageTitle: "Quiz Interactifs",
+    quizPageDesc: "Testez vos connaissances avec explications.",
+    mathQuizTitle: "Défis Mathématiques",
+    mathQuizDesc: "Calcul, équations et géométrie.",
+    sciQuizTitle: "Sciences Générales",
+    sciQuizDesc: "Physique, chimie et biologie.",
+    langQuizTitle: "Langues & Logique",
+    langQuizDesc: "Compréhension et raisonnement.",
+    startQuizBtn: "Démarrer le quiz",
+    latestResultTitle: "Dernier résultat",
+    latestResultDesc: "Résultats enregistrés localement.",
+    noQuizYet: "Aucun quiz terminé pour le moment.",
+    planEyebrow: "GESTION DU TEMPS",
+    planTitle: "Planning d'étude hebdomadaire",
+    planDesc: "Définissez un objectif quotidien.",
+    savePlanBtn: "Enregistrer le plan",
+    profileEyebrow: "ESPACE PERSONNEL",
+    profileTitle: "Profil & Progrès",
+    profileDesc: "Gérez vos paramètres et votre historique.",
+    progressSummary: "Résumé du progrès",
+    bestScore: "Meilleur score",
+    completedHistory: "Historique des leçons",
+    studentSettings: "Paramètres de l'élève",
+    labelDisplayName: "Nom d'affichage",
+    labelGrade: "Niveau scolaire",
+    saveSettings: "Enregistrer",
+    exportData: "Exporter les données (.json)",
+    clearData: "Effacer les données",
+    footerNote: "Design Adaptatif • Support Multilingue",
+    studySteps: "Étapes suggérées",
+    step1: "Lisez attentivement les objectifs.",
+    step2: "Consultez les supports du cours.",
+    step3: "Faites les exercices pratiques.",
+    markComplete: "Marquer la leçon comme terminée ✓",
+    quizModalTitle: "Quiz pratique",
+    nextQuestion: "Question suivante →",
+    welcomeEyebrow: "Bienvenue",
+    welcomeModalTitle: "Bienvenue sur EduSphere",
+    welcomeModalDesc: "Personnalisez votre espace d'étude.",
+    saveAndContinue: "Enregistrer et continuer",
+    days: ["Samedi", "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"],
+    startLesson: "Démarrer",
+    completedTag: "Terminé ✓",
+    openLesson: "Ouvrir la leçon →"
+  },
+  de: {
+    dir: 'ltr',
+    font: "Inter, 'Segoe UI', Arial, sans-serif",
+    tagline: "Online-Lernplattform",
+    mainMenu: "HAUPTMENÜ",
+    navDashboard: "Dashboard",
+    navCourses: "Kurse",
+    navOfficial: "E-Bibliothek",
+    navQuizzes: "Quiz",
+    navPlanner: "Lernplan",
+    navProgress: "Mein Fortschritt",
+    sideKeepGoing: "WEITERMACHEN ✦",
+    sideStepTitle: "Jeden Tag ein Schritt",
+    sideStepDesc: "Schon 30 Minuten tägliches Lernen machen einen großen Unterschied.",
+    sidePlanBtn: "Woche planen",
+    welcomePrefix: "Willkommen bei EduSphere 👋",
+    searchPlaceholder: "Lektionen suchen...",
+    heroEyebrow: "GLOBALES LERNEN • DEINE ZUKUNFT",
+    heroTitle: "Lerne in deinem Tempo und erreiche deine Ziele.",
+    heroDesc: "Eine All-in-One-Plattform zur Organisation deiner Lernzeit und Durchführung interaktiver Tests.",
+    startStudying: "Jetzt Lernen →",
+    tryQuiz: "Quiz ausprobieren",
+    statCompleted: "Abgeschlossene Lektionen",
+    statCompletedSub: "Jede Lektion zählt",
+    statQuizScore: "Letztes Quiz-Ergebnis",
+    statQuizSub: "Übung macht den Meister",
+    statGoals: "Wochenziele",
+    statGoalsSub: "Flexibler Lernplan",
+    statStreak: "Aktive Tage",
+    statStreakSub: "Tage mit Lernaktivität",
+    chooseGradeTitle: "Wähle deine Klassenstufe",
+    chooseGradeDesc: "Wähle deine Stufe, um Fächer anzuzeigen.",
+    browseAllSubjects: "Alle Fächer durchsuchen →",
+    continueTitle: "Weiterlernen",
+    continueDesc: "Kürzlich verfügbare Lektionen",
+    allLessons: "Alle Lektionen",
+    toolsTitle: "Interaktive Lernwerkzeuge",
+    toolsDesc: "Steigere deine Produktivität.",
+    toolQuiz: "Teste dich",
+    toolQuizSub: "Quizze & Feedback",
+    toolPlan: "Woche planen",
+    toolPlanSub: "Tägliche Ziele",
+    toolSubjects: "Fächer durchsuchen",
+    toolSubjectsSub: "Nach Stufe & Semester",
+    toolTrack: "Fortschritt verfolgen",
+    toolTrackSub: "Leistungsübersicht",
+    disclaimer: "Hinweis: EduSphere Online ist eine unabhängige Lernplattform.",
+    coursesEyebrow: "LERNBIBLIOTHEK",
+    coursesTitle: "Lehrplan & Fächer",
+    coursesDesc: "Filtere nach Stufe, Semester und Fach.",
+    term1: "Semester 1",
+    term2: "Semester 2",
+    resetFilters: "Zurücksetzen",
+    libraryEyebrow: "DIGITALE RESSOURCEN",
+    libraryTitle: "Offizielle Lehrbücher & Quellen",
+    libraryDesc: "Direkte Links zu offiziellen Bildungsressourcen.",
+    quizEyebrow: "PRÜFUNG & BEWERTUNG",
+    quizPageTitle: "Interaktive Quizze",
+    quizPageDesc: "Teste dein Wissen mit Erklärungen.",
+    mathQuizTitle: "Mathematik-Herausforderung",
+    mathQuizDesc: "Arithmetik, Gleichungen und Geometrie.",
+    sciQuizTitle: "Naturwissenschaften",
+    sciQuizDesc: "Physik, Chemie und Biologie.",
+    langQuizTitle: "Sprachen & Logik",
+    langQuizDesc: "Leseverständnis und logisches Denken.",
+    startQuizBtn: "Quiz starten",
+    latestResultTitle: "Letztes Ergebnis",
+    latestResultDesc: "Ergebnisse werden lokal gespeichert.",
+    noQuizYet: "Noch kein Quiz absolviert.",
+    planEyebrow: "ZEITMANAGEMENT",
+    planTitle: "Wöchentlicher Lernplan",
+    planDesc: "Setze dir tägliche Ziele.",
+    savePlanBtn: "Plan speichern",
+    profileEyebrow: "PERSÖNLICHER BEREICH",
+    profileTitle: "Mein Profil & Fortschritt",
+    profileDesc: "Verwalte deine Einstellungen und deinen Verlauf.",
+    progressSummary: "Fortschrittsübersicht",
+    bestScore: "Beste Punktzahl",
+    completedHistory: "Lektionsverlauf",
+    studentSettings: "Schülereinstellungen",
+    labelDisplayName: "Anzeigename",
+    labelGrade: "Klassenstufe",
+    saveSettings: "Einstellungen speichern",
+    exportData: "Daten exportieren (.json)",
+    clearData: "Lokal Daten löschen",
+    footerNote: "Responsive Design • Mehrsprachige Unterstützung",
+    studySteps: "Empfohlene Lernschritte",
+    step1: "Lies die Lernziele aufmerksam durch.",
+    step2: "Gehe die Kursmaterialien durch.",
+    step3: "Löse Übungsaufgaben und Selbsttests.",
+    markComplete: "Als abgeschlossen markieren ✓",
+    quizModalTitle: "Übungsquiz",
+    nextQuestion: "Nächste Frage →",
+    welcomeEyebrow: "Willkommen",
+    welcomeModalTitle: "Willkommen bei EduSphere",
+    welcomeModalDesc: "Personalisere deinen Lernbereich auf diesem Gerät.",
+    saveAndContinue: "Speichern und Weiter",
+    days: ["Samstag", "Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"],
+    startLesson: "Starten",
+    completedTag: "Abgeschlossen ✓",
+    openLesson: "Lektion öffnen →"
+  }
+};
+
+// Application Data Structures
+const grades = [
+  { id: 'g7', nameAr: 'الصف السابع (Grade 7)', nameEn: 'Grade 7 (Prep 1)', stage: 'Preparatory / Middle', subjects: ['Mathematics', 'Science', 'Arabic', 'English', 'Social Studies', 'ICT'] },
+  { id: 'g8', nameAr: 'الصف الثامن (Grade 8)', nameEn: 'Grade 8 (Prep 2)', stage: 'Preparatory / Middle', subjects: ['Mathematics', 'Science', 'Arabic', 'English', 'Social Studies', 'ICT'] },
+  { id: 'g9', nameAr: 'الصف التاسع (Grade 9)', nameEn: 'Grade 9 (Prep 3)', stage: 'Preparatory / Middle', subjects: ['Mathematics', 'Science', 'Arabic', 'English', 'Social Studies', 'ICT'] },
+  { id: 'g10', nameAr: 'الصف العاشر (Grade 10)', nameEn: 'Grade 10 (Secondary 1)', stage: 'Secondary / High School', subjects: ['Mathematics', 'Physics', 'Chemistry', 'Biology', 'Arabic', 'English', 'History', 'Philosophy'] },
+  { id: 'g11', nameAr: 'الصف الحادي عشر (Grade 11)', nameEn: 'Grade 11 (Secondary 2)', stage: 'Secondary / High School', subjects: ['Mathematics', 'Physics', 'Chemistry', 'Biology', 'Arabic', 'English', 'History'] },
+  { id: 'g12', nameAr: 'الصف الثاني عشر (Grade 12)', nameEn: 'Grade 12 (Secondary 3)', stage: 'Secondary / High School', subjects: ['Mathematics', 'Physics', 'Chemistry', 'Biology', 'Arabic', 'English', 'History'] }
+];
+
+const subjectIcons = {
+  'Mathematics': '➗', 'Science': '🔬', 'Arabic': '📖', 'English': '🔤',
+  'Social Studies': '🌍', 'ICT': '💻', 'Physics': '⚛️', 'Chemistry': '🧫',
+  'Biology': '🧬', 'History': '🏺', 'Philosophy': '💭'
+};
+
+const sampleLessonTitles = {
+  'Mathematics': ['Algebra & Operations', 'Equations & Functions', 'Geometry & Trigonometry'],
+  'Science': ['Matter & Interactions', 'Energy & Forces', 'Ecosystems & Life'],
+  'Arabic': ['Reading Comprehension', 'Grammar Rules & Syntax', 'Literary Analysis'],
+  'English': ['Reading & Vocabulary', 'Grammar in Context', 'Essay Writing'],
+  'Social Studies': ['World Geography', 'Historical Epochs', 'Civics & Society'],
+  'ICT': ['Computer Science Fundamentals', 'Cybersecurity', 'Web & Programming'],
+  'Physics': ['Kinematics & Motion', 'Dynamics & Forces', 'Electricity & Magnetism'],
+  'Chemistry': ['Atomic Structure', 'Chemical Reactions', 'Organic Chemistry Basics'],
+  'Biology': ['Cell Biology', 'Genetics & DNA', 'Human Physiology'],
+  'History': ['Ancient Civilizations', 'Modern World History', 'Historical Sources'],
+  'Philosophy': ['Critical Thinking', 'Logic Fundamentals', 'Ethics & Dialogue']
+};
+
+function makeLessons() {
+  let list = [];
+  grades.forEach(g => {
+    g.subjects.forEach(sub => {
+      [1, 2].forEach(term => {
+        let titles = sampleLessonTitles[sub] || ['Introduction', 'Core Concepts', 'Review & Practice'];
+        titles.forEach((title, i) => {
+          list.push({
+            id: `${g.id}-${term}-${sub}-${i}`,
+            grade: g.id,
+            subject: sub,
+            term: term,
+            title: title,
+            icon: subjectIcons[sub] || '📘',
+            unit: `Unit ${i + 1}`
+          });
+        });
+      });
+    });
+  });
+  return list;
+}
+
+const lessons = makeLessons();
+
+// State Management
+const KEY = 'eduSphere_app_state_v1';
+const defaults = { name: '', grade: 'g7', lang: 'ar', completed: [], plan: {}, scores: {}, streakDays: [] };
+
+function loadState() {
+  try { return { ...defaults, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; }
+  catch(e) { return { ...defaults }; }
+}
+
+let state = loadState();
+let currentLesson = null;
+let quizState = null;
+
+function saveState() {
+  localStorage.setItem(KEY, JSON.stringify(state));
+  renderStats();
+}
+
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// I18N Helper
+function t(key) {
+  let lang = state.lang || 'ar';
+  return i18n[lang]?.[key] || i18n['en']?.[key] || key;
+}
+
+function updateLanguage(newLang) {
+  state.lang = newLang;
+  let dict = i18n[newLang] || i18n['ar'];
+  
+  // Set HTML Dir and Font
+  document.documentElement.setAttribute('dir', dict.dir);
+  document.documentElement.setAttribute('lang', newLang);
+  document.documentElement.style.setProperty('--font-family', dict.font);
+
+  // Translate all marked elements
+  $$('[data-i18n]').forEach(el => {
+    let k = el.dataset.i18n;
+    if (dict[k]) {
+      if (el.tagName === 'INPUT' && el.type === 'text') {
+        el.placeholder = dict[k];
+      } else {
+        el.textContent = dict[k];
+      }
+    }
+  });
+
+  $('#globalSearch').placeholder = dict.searchPlaceholder;
+
+  // Re-render components with localized text
+  populateGradeSelects();
+  renderGradeCards();
+  renderOfficialGrid();
+  renderRecent();
+  renderLessons();
+  renderPlanner();
+  renderProfile();
+  renderStats();
+  updateWelcomeHeader();
+
+  saveState();
+}
+
+function updateWelcomeHeader() {
+  let nameStr = state.name ? state.name : '';
+  let prefix = t('welcomePrefix');
+  $('#welcome').textContent = nameStr ? `${prefix.replace('👋', '')} ${nameStr} 👋` : prefix;
+}
+
+function showToast(msg) {
+  let toast = $('#toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => toast.classList.remove('show'), 2800);
+}
+
+// Page Navigation
+function gotoPage(name) {
+  $$('.page').forEach(p => p.classList.toggle('active', p.id === 'page-' + name));
+  $$('#nav button').forEach(b => b.classList.toggle('active', b.dataset.page === name));
+  if (name === 'courses') renderLessons();
+  if (name === 'planner') renderPlanner();
+  if (name === 'profile') renderProfile();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+$$('#nav button').forEach(b => b.addEventListener('click', () => gotoPage(b.dataset.page)));
+$$('[data-go]').forEach(b => b.addEventListener('click', () => gotoPage(b.dataset.go)));
+$$('[data-close]').forEach(b => b.addEventListener('click', () => $('#' + b.dataset.close).classList.remove('open')));
+$$('.modalback').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); }));
+
+function gradeName(id) {
+  let g = grades.find(x => x.id === id) || grades[0];
+  return state.lang === 'ar' ? g.nameAr : g.nameEn;
+}
+
+function renderGradeCards() {
+  let host = $('#gradeCards');
+  if (!host) return;
+  host.innerHTML = grades.map((g, i) => `
+    <article class="course">
+      <div class="courseicon">${i < 3 ? '📘' : '🎓'}</div>
+      <h3>${esc(state.lang === 'ar' ? g.nameAr : g.nameEn)}</h3>
+      <p>${esc(g.stage)} • ${g.subjects.length} subjects</p>
+      <div class="coursefoot">
+        <span class="smallmuted">${g.subjects.slice(0, 2).join(' • ')}</span>
+        <button class="btn" data-grade-open="${g.id}">${t('openLesson')}</button>
+      </div>
+    </article>
+  `).join('');
+
+  $$('[data-grade-open]').forEach(b => b.addEventListener('click', () => {
+    $('#gradeFilter').value = b.dataset.gradeOpen;
+    populateSubjects();
+    gotoPage('courses');
+  }));
+}
+
+function renderOfficialGrid() {
+  let grid = $('#officialGrid');
+  if (!grid) return;
+  grid.innerHTML = grades.map(g => `
+    <article class="official-card">
+      <h3>${esc(state.lang === 'ar' ? g.nameAr : g.nameEn)}</h3>
+      <p>Curriculum books, digital interactive PDFs, and open educational resources.</p>
+      <a class="btn primary" href="https://openstax.org" target="_blank" rel="noopener">Open Books Library ↗</a>
+    </article>
+  `).join('');
+}
+
+function populateGradeSelects() {
+  ['gradeFilter', 'profileGrade', 'welcomeGrade'].forEach(id => {
+    let select = $('#' + id);
+    if (select) {
+      select.innerHTML = grades.map(g => `<option value="${g.id}">${esc(state.lang === 'ar' ? g.nameAr : g.nameEn)}</option>`).join('');
+    }
+  });
+  if ($('#gradeFilter')) $('#gradeFilter').value = state.grade;
+  if ($('#profileGrade')) $('#profileGrade').value = state.grade;
+  if ($('#welcomeGrade')) $('#welcomeGrade').value = state.grade;
+  populateSubjects();
+}
+
+function populateSubjects() {
+  let g = grades.find(x => x.id === $('#gradeFilter').value) || grades[0];
+  let subSelect = $('#subjectFilter');
+  if (!subSelect) return;
+  subSelect.innerHTML = `<option value="all">${state.lang === 'ar' ? 'جميع المواد' : 'All Subjects'}</option>` +
+    g.subjects.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join('');
+}
+
+function renderLessons() {
+  let host = $('#lessonList');
+  if (!host) return;
+
+  let g = $('#gradeFilter').value;
+  let term = $('#termFilter').value;
+  let sub = $('#subjectFilter').value;
+  let query = $('#globalSearch').value.trim().toLowerCase();
+
+  let filtered = lessons.filter(l => 
+    l.grade === g &&
+    String(l.term) === String(term) &&
+    (sub === 'all' || l.subject === sub) &&
+    (!query || (l.title + ' ' + l.subject + ' ' + gradeName(l.grade)).toLowerCase().includes(query))
+  );
+
+  host.innerHTML = filtered.length ? filtered.map(l => `
+    <article class="lessoncard">
+      <div class="lessonicon">${l.icon}</div>
+      <div style="flex:1; min-width:0;">
+        <h3>${esc(l.title)}</h3>
+        <p>${esc(l.subject)} • ${gradeName(l.grade)} • ${t('term1')}</p>
+        <button class="btn" data-lesson="${esc(l.id)}">${state.completed.includes(l.id) ? t('completedTag') : t('openLesson')}</button>
+      </div>
+    </article>
+  `).join('') : `<div class="empty" style="grid-column:1/-1">${state.lang === 'ar' ? 'لا توجد نتائج مطابقة' : 'No matching lessons found.'}</div>`;
+
+  $$('[data-lesson]').forEach(b => b.addEventListener('click', () => openLesson(b.dataset.lesson)));
+}
+
+$('#gradeFilter').addEventListener('change', () => { populateSubjects(); renderLessons(); });
+$('#termFilter').addEventListener('change', renderLessons);
+$('#subjectFilter').addEventListener('change', renderLessons);
+$('#resetFilters').addEventListener('click', () => {
+  $('#gradeFilter').value = state.grade;
+  $('#termFilter').value = '1';
+  $('#globalSearch').value = '';
+  populateSubjects();
+  renderLessons();
+});
+
+$('#globalSearch').addEventListener('input', () => {
+  if ($('#page-courses').classList.contains('active')) renderLessons();
+  else if ($('#globalSearch').value.trim()) { gotoPage('courses'); renderLessons(); }
+});
+
+function openLesson(id) {
+  let l = lessons.find(x => x.id === id);
+  if (!l) return;
+  currentLesson = l;
+  $('#lessonSubject').textContent = l.subject;
+  $('#lessonTitle').textContent = l.title;
+  $('#lessonMeta').textContent = `${gradeName(l.grade)} • Term ${l.term} • ${l.unit}`;
+  $('#completeLesson').textContent = state.completed.includes(id) ? t('completedTag') : t('markComplete');
+  $('#lessonModal').classList.add('open');
+}
+
+$('#completeLesson').addEventListener('click', () => {
+  if (!currentLesson) return;
+  if (!state.completed.includes(currentLesson.id)) state.completed.push(currentLesson.id);
+  
+  let today = new Date().toISOString().slice(0, 10);
+  if (!state.streakDays.includes(today)) state.streakDays.push(today);
+
+  saveState();
+  renderRecent();
+  renderLessons();
+  $('#lessonModal').classList.remove('open');
+  showToast(state.lang === 'ar' ? 'تمت إضافته لإنجازاتك ✓' : 'Lesson marked as complete ✓');
+});
+
+function renderRecent() {
+  let host = $('#recentLessons');
+  if (!host) return;
+  let list = lessons.filter(l => l.grade === state.grade).slice(0, 3);
+  host.innerHTML = list.map(l => `
+    <div class="lessonrow">
+      <div class="lessonicon">${l.icon}</div>
+      <div class="lessoninfo">
+        <strong>${esc(l.title)}</strong>
+        <small>${esc(l.subject)} • ${gradeName(l.grade)}</small>
+      </div>
+      <button class="btn" data-recent="${l.id}">${t('startLesson')}</button>
+    </div>
+  `).join('');
+
+  $$('[data-recent]').forEach(b => b.addEventListener('click', () => openLesson(b.dataset.recent)));
+}
+
+function renderStats() {
+  let done = state.completed.length;
+  let scores = Object.values(state.scores);
+  let best = scores.length ? Math.max(...scores) : null;
+
+  $('#statLessons').textContent = done;
+  $('#statScore').textContent = best === null ? '—' : best + '%';
+  $('#statGoals').textContent = Object.values(state.plan).filter(x => x.done).length + '/7';
+  $('#statStreak').textContent = state.streakDays.length;
+
+  if ($('#profileLessons')) $('#profileLessons').textContent = done;
+  if ($('#profileBest')) $('#profileBest').textContent = best === null ? '—' : best + '%';
+
+  let last = Object.entries(state.scores).slice(-1)[0];
+  $('#lastResult').textContent = last ? `${state.lang === 'ar' ? 'آخر نتيجة اختبار:' : 'Latest quiz result:'} ${last[1]}%` : t('noQuizYet');
+}
+
+function renderPlanner() {
+  let host = $('#plannerRows');
+  if (!host) return;
+  let days = i18n[state.lang]?.days || i18n['en'].days;
+
+  host.innerHTML = days.map((day, i) => `
+    <div class="planrow">
+      <strong>${day}</strong>
+      <input type="text" data-plan-text="${i}" placeholder="${state.lang === 'ar' ? 'أدخل هدف المذاكرة...' : 'Set study goal...'}" value="${esc(state.plan[i]?.text || '')}">
+      <label><input type="checkbox" data-plan-done="${i}" ${state.plan[i]?.done ? 'checked' : ''}> ${state.lang === 'ar' ? 'تم' : 'Done'}</label>
+    </div>
+  `).join('');
+
+  $$('[data-plan-done]').forEach(el => el.addEventListener('change', () => savePlan(false)));
+}
+
+function savePlan(showToastMsg = true) {
+  let p = {};
+  for (let i = 0; i < 7; i++) {
+    p[i] = {
+      text: $(`[data-plan-text="${i}"]`)?.value || '',
+      done: !!$(`[data-plan-done="${i}"]`)?.checked
+    };
+  }
+  state.plan = p;
+  saveState();
+  if (showToastMsg) {
+    showToast(state.lang === 'ar' ? 'تم حفظ الخطة بنجاح ✓' : 'Study plan saved ✓');
+    $('#planMessage').textContent = state.lang === 'ar' ? 'تم حفظ الخطة على هذا الجهاز.' : 'Plan saved locally.';
+  }
+}
+
+$('#savePlan').addEventListener('click', () => savePlan(true));
+
+function renderProfile() {
+  if ($('#profileName')) $('#profileName').value = state.name || '';
+  if ($('#profileGrade')) $('#profileGrade').value = state.grade;
+
+  let host = $('#completedList');
+  if (!host) return;
+  host.innerHTML = state.completed.length ? state.completed.slice(-6).reverse().map(id => {
+    let l = lessons.find(x => x.id === id);
+    return l ? `
+      <div class="lessonrow">
+        <div class="lessonicon">✓</div>
+        <div class="lessoninfo">
+          <strong>${esc(l.title)}</strong>
+          <small>${esc(l.subject)} • ${gradeName(l.grade)}</small>
+        </div>
+      </div>
+    ` : '';
+  }).join('') : `<div class="empty">${state.lang === 'ar' ? 'لا توجد دروس مكتملة بعد.' : 'No completed lessons yet.'}</div>`;
+}
+
+$('#saveProfile').addEventListener('click', () => {
+  state.name = $('#profileName').value.trim();
+  state.grade = $('#profileGrade').value;
+  saveState();
+  updateWelcomeHeader();
+  renderRecent();
+  showToast(state.lang === 'ar' ? 'تم حفظ البيانات' : 'Settings saved');
+});
+
+$('#accountBtn').addEventListener('click', () => {
+  $('#welcomeName').value = state.name;
+  $('#welcomeGrade').value = state.grade;
+  $('#accountModal').classList.add('open');
+});
+
+$('#saveWelcome').addEventListener('click', () => {
+  state.name = $('#welcomeName').value.trim();
+  state.grade = $('#welcomeGrade').value;
+  saveState();
+  $('#accountModal').classList.remove('open');
+  updateWelcomeHeader();
+  renderRecent();
+  showToast(state.lang === 'ar' ? 'مرحباً بك!' : 'Welcome!');
+});
+
+$('#exportData').addEventListener('click', () => {
+  let blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  let url = URL.createObjectURL(blob);
+  let a = document.createElement('a');
+  a.href = url;
+  a.download = 'edusphere-progress.json';
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+$('#clearData').addEventListener('click', () => {
+  if (confirm(state.lang === 'ar' ? 'هل أنت تأكد من مسح جميع البيانات؟' : 'Are you sure you want to clear all data?')) {
+    localStorage.removeItem(KEY);
+    state = { ...defaults, lang: state.lang };
+    saveState();
+    renderPlanner();
+    renderProfile();
+    renderRecent();
+    showToast(state.lang === 'ar' ? 'تم مسح البيانات' : 'Data cleared');
+  }
+});
+
+// Quiz Engine
+const quizzes = {
+  math: {
+    title: 'Mathematics Challenge',
+    questions: [
+      { q: 'What is 15 × 6?', options: ['80', '90', '100', '85'], a: 1, why: '15 × 6 = 90.' },
+      { q: 'Solve for x: 2x + 8 = 20', options: ['x = 4', 'x = 6', 'x = 8', 'x = 5'], a: 1, why: 'Subtract 8 from both sides (2x = 12), then divide by 2: x = 6.' },
+      { q: 'What is the area of a rectangle with length 8 and width 5?', options: ['13', '26', '40', '35'], a: 2, why: 'Area = length × width = 8 × 5 = 40.' }
+    ]
+  },
+  science: {
+    title: 'General Sciences',
+    questions: [
+      { q: 'What is the chemical formula for water?', options: ['CO2', 'H2O', 'O2', 'NaCl'], a: 1, why: 'Water is composed of two Hydrogen atoms and one Oxygen atom (H2O).' },
+      { q: 'Which organelle is known as the powerhouse of the cell?', options: ['Nucleus', 'Mitochondria', 'Ribosome', 'Golgi apparatus'], a: 1, why: 'Mitochondria produce energy (ATP) for the cell.' },
+      { q: 'What force pulls objects toward the center of the Earth?', options: ['Magnetism', 'Friction', 'Gravity', 'Tension'], a: 2, why: 'Gravity attracts objects with mass toward each other.' }
+    ]
+  },
+  language: {
+    title: 'Languages & Logic',
+    questions: [
+      { q: 'Choose the synonym for "Abundant":', options: ['Scarce', 'Plentiful', 'Small', 'Empty'], a: 1, why: '"Abundant" means present in large quantities.' },
+      { q: 'If all A are B, and all B are C, then:', options: ['All A are C', 'Some C are not A', 'No A is C', 'None of these'], a: 0, why: 'This is a standard transitive logical syllogism.' }
+    ]
+  }
+};
+
+function startQuiz(type) {
+  let qData = quizzes[type] || quizzes.math;
+  quizState = { type, quiz: qData, index: 0, score: 0, answered: false };
+  $('#quizTitle').textContent = qData.title;
+  $('#quizModal').classList.add('open');
+  renderQuizQuestion();
+}
+
+$$('[data-quiz]').forEach(b => b.addEventListener('click', () => startQuiz(b.dataset.quiz)));
+
+function renderQuizQuestion() {
+  let s = quizState;
+  let q = s.quiz.questions[s.index];
+  s.answered = false;
+
+  $('#quizProgress').textContent = `Question ${s.index + 1} of ${s.quiz.questions.length}`;
+  $('#quizContent').innerHTML = `<div class="question">${esc(q.q)}</div>` +
+    q.options.map((opt, i) => `<button class="option" data-option="${i}">${esc(opt)}</button>`).join('');
+
+  $('#quizFeedback').innerHTML = '';
+  $('#quizNext').disabled = true;
+  $('#quizNext').textContent = s.index === s.quiz.questions.length - 1 ? (state.lang === 'ar' ? 'عرض النتيجة' : 'Show Results') : t('nextQuestion');
+
+  $$('[data-option]').forEach(btn => btn.addEventListener('click', () => {
+    if (s.answered) return;
+    s.answered = true;
+    let chosen = Number(btn.dataset.option);
+    if (chosen === q.a) s.score++;
+
+    $$('[data-option]').forEach((optBtn, i) => {
+      optBtn.disabled = true;
+      if (i === q.a) optBtn.classList.add('correct');
+      if (i === chosen && chosen !== q.a) optBtn.classList.add('wrong');
+    });
+
+    $('#quizFeedback').innerHTML = `
+      <div class="notice" style="border-color:${chosen === q.a ? '#4be0ad66' : '#ffbd6966'}">
+        <b>${chosen === q.a ? '✓ Correct!' : 'Correct answer: ' + q.options[q.a]}</b><br>${esc(q.why)}
+      </div>
+    `;
+    $('#quizNext').disabled = false;
+  }));
+}
+
+$('#quizNext').addEventListener('click', () => {
+  let s = quizState;
+  if (!s || !s.answered) return;
+
+  if (s.index < s.quiz.questions.length - 1) {
+    s.index++;
+    renderQuizQuestion();
+  } else {
+    let pct = Math.round((s.score / s.quiz.questions.length) * 100);
+    state.scores[s.type] = pct;
+    saveState();
+
+    $('#quizProgress').textContent = 'Completed!';
+    $('#quizContent').innerHTML = `
+      <div class="empty">
+        <div style="font-size:45px">🏆</div>
+        <h2>Score: ${s.score} / ${s.quiz.questions.length}</h2>
+        <p>Percentage: <b>${pct}%</b></p>
+      </div>
+    `;
+    $('#quizFeedback').innerHTML = '';
+    $('#quizNext').textContent = state.lang === 'ar' ? 'إغلاق' : 'Close';
+    $('#quizNext').disabled = false;
+    $('#quizNext').onclick = () => {
+      $('#quizModal').classList.remove('open');
+      $('#quizNext').onclick = null;
+    };
+  }
+});
+
+// Language Switch Listener
+$('#langSelect').addEventListener('change', e => {
+  updateLanguage(e.target.value);
+});
+
+// Initialize Application
+function init() {
+  $('#langSelect').value = state.lang || 'ar';
+  updateLanguage(state.lang || 'ar');
+
+  let d = new Date();
+  $('#dateLabel').textContent = d.toLocaleDateString(state.lang === 'ar' ? 'ar-EG' : 'en-US', { weekday: 'long', day: 'numeric', month: 'long' });
+
+  if (!state.name) {
+    setTimeout(() => $('#accountModal').classList.add('open'), 600);
+  }
+}
+
+window.onload = init;
+</script>
+</body>
+</html>
+```
